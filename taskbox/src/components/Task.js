@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// props Types 명시 
-
 export default function Task({ task: { id, title, state }, onArchiveTask, onPinTask }) {
   return (
     <div className={`list-item ${state}`}>
@@ -36,7 +34,7 @@ export default function Task({ task: { id, title, state }, onArchiveTask, onPinT
   );
 }
 
-Task.PropTypes = {
+Task.propTypes = {
   /** Composition of the task */
   task: PropTypes.shape({
     /** Id of the task */
@@ -50,4 +48,4 @@ Task.PropTypes = {
   onArchiveTask: PropTypes.func,
   /** Event to change the task to pinned */
   onPinTask: PropTypes.func,
-}
+};
