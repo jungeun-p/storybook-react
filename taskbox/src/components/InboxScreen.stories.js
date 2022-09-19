@@ -4,6 +4,14 @@ import InboxScreen from "./InboxScreen";
 import { rest } from 'msw';
 import { MockedState } from "./TaskList.stories";
 
+import {
+fireEvent,
+within,
+waitFor,
+waitForElementToBeRemoved
+} from '@storybook/testing-library';
+    
+
 export default {
     component: InboxScreen,
     title: "InboxScreen",
@@ -37,4 +45,15 @@ Error.parameters = {
             )
         ]
     }
+}
+
+Default.play = async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    // loading state 
+    await waitForElementToBeRemoved(await canvas.findByTestId('loading'));
+    // update store
+    await waitFor(async () => {
+        await fireEvent.click(canvas.getByLabelText('pinTask-1'));
+        await fireEvent.click(canvas.getByLabelText('pinTask-3'));
+    })
 }
